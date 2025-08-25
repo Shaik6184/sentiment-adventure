@@ -70,6 +70,7 @@
           </p>
           <div class="story-actions">
             <a class="btn primary" href="#playground">Let me try!</a>
+            <button id="speakStoryBtn" class="btn" type="button">Hear this part 🔊</button>
           </div>
         </div>
       </section>
@@ -78,6 +79,27 @@
       <section id="playground" class="section">
         <div class="card">
           <h2>Try the Sentiment Analyzer</h2>
+          <div class="mode-row">
+            <span class="label">Mode:</span>
+            <label class="mode"><input type="radio" name="mode" id="modeRule" checked> Rule-based</label>
+            <label class="mode"><input type="radio" name="mode" id="modeAFINN"> AFINN</label>
+            <label class="mode"><input type="radio" name="mode" id="modeCompare"> Compare</label>
+          </div>
+          <details class="tuning">
+            <summary>Adjust the detective’s powers (advanced)</summary>
+            <div class="slider-group">
+              <label>Intensifier Boost <span id="intensVal">+2</span>
+                <input type="range" id="intensSlider" min="0" max="3" value="2" />
+              </label>
+              <label>Exclamation Power <span id="exclVal">+1</span>
+                <input type="range" id="exclSlider" min="0" max="2" value="1" />
+              </label>
+              <label>Flip on Negation
+                <input type="checkbox" id="negFlipCk" checked />
+              </label>
+              <button id="resetTuning" class="btn" type="button">Reset</button>
+            </div>
+          </details>
           <label for="inputText" class="label">Type a message or pick an example:</label>
           <div class="examples">
             <button class="chip" data-example="I love this game! It’s amazing and fun! 😄">“I love this game! It’s amazing and fun! 😄”</button>
@@ -89,6 +111,7 @@
           <div class="controls">
             <button id="analyzeBtn" class="btn primary">Analyze 💡</button>
             <button id="clearBtn" class="btn">Clear</button>
+            <button id="speakResultBtn" class="btn" type="button">Speak Result 🔊</button>
           </div>
 
           <div id="result" class="result hidden">
@@ -104,6 +127,31 @@
               <summary>Why this result?</summary>
               <ul id="reasons" class="reasons"></ul>
             </details>
+          </div>
+
+          <div id="resultCompare" class="result hidden">
+            <div class="compare-grid">
+              <div class="mini-card">
+                <div class="muted">Rule-based</div>
+                <div class="result-summary">
+                  <div id="faceRule" class="face">😐</div>
+                  <div>
+                    <div class="score-line"><strong>Score:</strong> <span id="scoreRule">0</span></div>
+                    <div class="score-line"><strong>Feeling:</strong> <span id="labelRule">Neutral</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="muted">AFINN</div>
+                <div class="result-summary">
+                  <div id="faceAFINN" class="face">😐</div>
+                  <div>
+                    <div class="score-line"><strong>Score:</strong> <span id="scoreAFINN">0</span></div>
+                    <div class="score-line"><strong>Feeling:</strong> <span id="labelAFINN">Neutral</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -200,6 +248,16 @@
           <div id="quizResult" class="feedback"></div>
         </div>
       </section>
+
+      <!-- Badges -->
+      <section id="badges" class="section">
+        <div class="card">
+          <h2>Your Badges</h2>
+          <div id="badgesGrid" class="badges-grid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="app-footer">
@@ -210,6 +268,8 @@
         Educational demo: rule-based sentiment only. Real apps often use ML models too.
       </div>
     </footer>
+
+    <canvas id="confettiCanvas" class="confetti-canvas" width="0" height="0" aria-hidden="true"></canvas>
 
     <script src="script.js"></script>
   </body>

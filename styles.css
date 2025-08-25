@@ -93,6 +93,13 @@ textarea {
   font-size: 16px;
 }
 
+.mode-row { display: flex; gap: 10px; align-items: center; margin: 8px 0 12px; }
+.mode { background: rgba(255,255,255,0.06); padding: 6px 10px; border-radius: 999px; }
+.tuning { margin: 10px 0; }
+.slider-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 8px; }
+.mini-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; }
+.compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-top: 10px; }
+
 .controls { display: flex; gap: 8px; margin-top: 10px; }
 
 .result { margin-top: 16px; }
@@ -117,6 +124,11 @@ textarea {
 .sentence { margin: 8px 0; font-size: 18px; }
 .feedback { margin-top: 8px; font-weight: 700; }
 
+.badges-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+.badge { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+.badge .emoji { font-size: 28px; }
+.badge .name { font-weight: 800; }
+
 .app-footer { text-align: center; padding: 30px 20px; color: var(--muted); }
 .small { font-size: 12px; opacity: 0.8; }
 
@@ -134,5 +146,7 @@ textarea {
   overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap;
 }
+
+.confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 100; }
 
 
