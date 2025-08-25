@@ -1,0 +1,138 @@
+:root {
+  --bg: #0f1226;
+  --card: #15183a;
+  --ink: #e9ecff;
+  --muted: #b9c0ff;
+  --primary: #6c7dff;
+  --primary-strong: #4a5bff;
+  --positive: #2ecc71;
+  --negative: #ff5c5c;
+  --neutral: #ffd166;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Nunito', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--ink);
+  background: radial-gradient(1200px 600px at 10% 0%, #1a1f49 0%, var(--bg) 50%),
+              radial-gradient(1200px 600px at 90% 0%, #1a2549 0%, var(--bg) 50%),
+              var(--bg);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: rgba(15, 18, 38, 0.7);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand .logo { font-size: 24px; }
+.brand .title { font-family: 'Fredoka', cursive; font-weight: 700; letter-spacing: 0.5px; }
+.top-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0 8px;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+.top-nav a:hover { color: var(--ink); background: rgba(255,255,255,0.06); }
+
+.section { padding: 56px 20px; max-width: 1000px; margin: 0 auto; }
+.hero { display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: center; gap: 20px; }
+.hero-art { font-size: 40px; text-align: center; }
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+h1, h2 { font-family: 'Fredoka', cursive; margin: 0 0 10px 0; }
+p { color: var(--muted); line-height: 1.6; }
+
+.btn {
+  background: rgba(255,255,255,0.08);
+  color: var(--ink);
+  padding: 10px 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn.primary { background: var(--primary); }
+.btn.primary:hover { background: var(--primary-strong); }
+.btn.secondary { background: transparent; border: 2px solid var(--primary); }
+
+.hero-actions { display: flex; gap: 10px; margin-top: 12px; }
+
+.clues { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 16px; color: var(--muted); }
+
+.examples { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 10px; }
+.chip { background: rgba(255,255,255,0.08); border: 1px dashed rgba(255,255,255,0.2); border-radius: 999px; padding: 6px 10px; color: var(--ink); cursor: pointer; }
+.chip:hover { background: rgba(255,255,255,0.12); }
+
+.label { color: var(--muted); font-weight: 700; }
+textarea {
+  width: 100%;
+  resize: vertical;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
+  color: var(--ink);
+  padding: 12px;
+  font-size: 16px;
+}
+
+.controls { display: flex; gap: 8px; margin-top: 10px; }
+
+.result { margin-top: 16px; }
+.hidden { display: none; }
+.result-summary { display: flex; gap: 12px; align-items: center; }
+.face { font-size: 40px; }
+.token-view { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.token {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.token.pos { background: rgba(46, 204, 113, 0.15); border-color: rgba(46, 204, 113, 0.5); }
+.token.neg { background: rgba(255, 92, 92, 0.15); border-color: rgba(255, 92, 92, 0.5); }
+.token.neu { background: rgba(255, 209, 102, 0.15); border-color: rgba(255, 209, 102, 0.5); }
+
+.explain summary { cursor: pointer; color: var(--ink); font-weight: 800; }
+.reasons { color: var(--muted); }
+
+.exercise { margin-top: 14px; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.05); }
+.exercise .goal { color: var(--muted); margin-bottom: 6px; }
+.sentence { margin: 8px 0; font-size: 18px; }
+.feedback { margin-top: 8px; font-weight: 700; }
+
+.app-footer { text-align: center; padding: 30px 20px; color: var(--muted); }
+.small { font-size: 12px; opacity: 0.8; }
+
+.pos-text { color: var(--positive); font-weight: 800; }
+.neg-text { color: var(--negative); font-weight: 800; }
+.neu-text { color: var(--neutral); font-weight: 800; }
+
+@media (max-width: 820px) {
+  .hero { grid-template-columns: 1fr; }
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentiment Adventure: Learn Sentiment Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="description" content="A playful web app that teaches 6th graders how Sentiment Analysis works through a story, interactive games, and a hands-on analyzer." />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo">🧠💬</div>
+        <div class="title">Sentiment Adventure</div>
+      </div>
+      <nav class="top-nav">
+        <a href="#intro">Home</a>
+        <a href="#story">Story</a>
+        <a href="#playground">Try It</a>
+        <a href="#game">Exercises</a>
+        <a href="#quiz">Quiz</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Intro / Hero -->
+      <section id="intro" class="section hero">
+        <div class="hero-content card">
+          <h1>Welcome to Sentiment Adventure! 🗺️</h1>
+          <p>
+            Meet <strong>Mia</strong> the Robot and <strong>Leo</strong> the Cat. They are message detectives.
+            Their job? Figure out if messages feel <span class="pos-text">happy</span>,
+            <span class="neu-text">neutral</span>, or <span class="neg-text">sad</span>.
+          </p>
+          <p>
+            This is called <strong>Sentiment Analysis</strong> — teaching computers to understand feelings in text.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#story">Start the Story</a>
+            <a class="btn secondary" href="#playground">Try the Analyzer</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">🤖 🐱 ✉️ 🙂 😐 🙁</div>
+      </section>
+
+      <!-- Story -->
+      <section id="story" class="section">
+        <div class="card">
+          <h2>The Tale of Mia and Leo</h2>
+          <p>
+            One day, Mia received a bunch of messages. Some said things like
+            “You did a <em>great</em> job! 🎉” and others said “This is <em>not</em> good.”
+            Mia asked Leo: “How can I sort these quickly?”
+          </p>
+          <p>
+            Leo smiled, “We can look for <strong>clues</strong>!”
+          </p>
+          <ul class="clues">
+            <li>Positive words like <strong>great</strong>, <strong>happy</strong>, <strong>awesome</strong></li>
+            <li>Negative words like <strong>bad</strong>, <strong>angry</strong>, <strong>terrible</strong></li>
+            <li>Negation words like <strong>not</strong>, <strong>never</strong> flip the feeling</li>
+            <li>Emojis and punctuation like <strong>!</strong> can make feelings stronger</li>
+          </ul>
+          <p>
+            “So we add up the clues,” said Leo. “If the total is high → <span class="pos-text">positive</span>,
+            if it’s low → <span class="neg-text">negative</span>, and if it’s around zero → <span class="neu-text">neutral</span>.”
+          </p>
+          <div class="story-actions">
+            <a class="btn primary" href="#playground">Let me try!</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Playground / Analyzer -->
+      <section id="playground" class="section">
+        <div class="card">
+          <h2>Try the Sentiment Analyzer</h2>
+          <label for="inputText" class="label">Type a message or pick an example:</label>
+          <div class="examples">
+            <button class="chip" data-example="I love this game! It’s amazing and fun! 😄">“I love this game! It’s amazing and fun! 😄”</button>
+            <button class="chip" data-example="I am not happy with the slow service.">“I am not happy with the slow service.”</button>
+            <button class="chip" data-example="The movie was okay, not bad, just fine.">“The movie was okay, not bad, just fine.”</button>
+            <button class="chip" data-example="Terrible weather but the hot chocolate was great!"><span class="visually-hidden">Example</span>“Terrible weather but the hot chocolate was great!”</button>
+          </div>
+          <textarea id="inputText" rows="4" placeholder="Type your message here..."></textarea>
+          <div class="controls">
+            <button id="analyzeBtn" class="btn primary">Analyze 💡</button>
+            <button id="clearBtn" class="btn">Clear</button>
+          </div>
+
+          <div id="result" class="result hidden">
+            <div class="result-summary">
+              <div id="face" class="face">😐</div>
+              <div>
+                <div class="score-line"><strong>Score:</strong> <span id="score">0</span></div>
+                <div class="score-line"><strong>Feeling:</strong> <span id="label">Neutral</span></div>
+              </div>
+            </div>
+            <div class="token-view" id="tokenView"></div>
+            <details class="explain">
+              <summary>Why this result?</summary>
+              <ul id="reasons" class="reasons"></ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exercises / Mini-games -->
+      <section id="game" class="section">
+        <div class="card">
+          <h2>Exercise: Build the Feeling</h2>
+          <p>Pick words to make the sentence feel Positive or Negative.</p>
+          <div class="exercise">
+            <div class="goal">
+              Goal: Make it <strong class="pos-text">Positive</strong>
+            </div>
+            <div class="sentence">
+              This pizza is <select id="ex1-word">
+                <option value="bad">bad</option>
+                <option value="okay">okay</option>
+                <option value="awesome">awesome</option>
+              </select>
+              !
+            </div>
+            <button class="btn" id="ex1-check">Check</button>
+            <div class="feedback" id="ex1-feedback"></div>
+          </div>
+
+          <div class="exercise">
+            <div class="goal">
+              Goal: Make it <strong class="neg-text">Negative</strong>
+            </div>
+            <div class="sentence">
+              I am <select id="ex2-word">
+                <option value="happy">happy</option>
+                <option value="not happy">not happy</option>
+                <option value="excited">excited</option>
+              </select>
+              about the delay.
+            </div>
+            <button class="btn" id="ex2-check">Check</button>
+            <div class="feedback" id="ex2-feedback"></div>
+          </div>
+
+          <div class="exercise">
+            <div class="goal">
+              Bonus: What happens if we add “not”?
+            </div>
+            <div class="sentence">
+              The weather is <select id="ex3-word">
+                <option value="good">good</option>
+                <option value="not good">not good</option>
+                <option value="great">great</option>
+              </select>
+              today.
+            </div>
+            <button class="btn" id="ex3-check">Check</button>
+            <div class="feedback" id="ex3-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quiz -->
+      <section id="quiz" class="section">
+        <div class="card">
+          <h2>Quick Quiz</h2>
+          <ol class="quiz-list">
+            <li>
+              Which word is usually <em>positive</em>?
+              <div class="options">
+                <label><input type="radio" name="q1" value="angry" /> angry</label>
+                <label><input type="radio" name="q1" value="awesome" /> awesome</label>
+                <label><input type="radio" name="q1" value="terrible" /> terrible</label>
+              </div>
+            </li>
+            <li>
+              What do words like “not” or “never” do?
+              <div class="options">
+                <label><input type="radio" name="q2" value="make-stronger" /> make feelings stronger</label>
+                <label><input type="radio" name="q2" value="flip" /> flip the feeling</label>
+                <label><input type="radio" name="q2" value="nothing" /> do nothing</label>
+              </div>
+            </li>
+            <li>
+              What can an exclamation mark “!” do?
+              <div class="options">
+                <label><input type="radio" name="q3" value="weaker" /> make it weaker</label>
+                <label><input type="radio" name="q3" value="stronger" /> make it stronger</label>
+                <label><input type="radio" name="q3" value="flip" /> flip the feeling</label>
+              </div>
+            </li>
+          </ol>
+          <div class="controls">
+            <button id="quizSubmit" class="btn primary">Check Answers ✅</button>
+            <button id="quizReset" class="btn">Reset</button>
+          </div>
+          <div id="quizResult" class="feedback"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div>
+        Built for curious kids. Made with ❤️ by Mia & Leo.
+      </div>
+      <div class="small">
+        Educational demo: rule-based sentiment only. Real apps often use ML models too.
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+
+
